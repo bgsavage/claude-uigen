@@ -10,10 +10,42 @@ interface MessageListProps {
   isLoading?: boolean;
 }
 
+function getToolDisplayName(toolName: string, args?: any): string {
+  if (toolName === "str_replace_editor") {
+    const command = args?.command;
+    switch (command) {
+      case "create":
+        return "Creating file";
+      case "view":
+        return "Viewing file";
+      case "str_replace":
+        return "Editing file";
+      case "insert":
+        return "Inserting code";
+      default:
+        return "Editing file";
+    }
+  }
+
+  if (toolName === "file_manager") {
+    const command = args?.command;
+    switch (command) {
+      case "rename":
+        return "Renaming file";
+      case "delete":
+        return "Deleting file";
+      default:
+        return "Managing file";
+    }
+  }
+
+  return toolName;
+}
+
 export function MessageList({ messages, isLoading }: MessageListProps) {
   if (messages.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)] px-4 text-center">
         <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-50 mb-4 shadow-sm">
           <Bot className="h-7 w-7 text-blue-600" />
         </div>
@@ -76,17 +108,18 @@ export function MessageList({ messages, isLoading }: MessageListProps) {
                             );
                           case "tool-invocation":
                             const tool = part.toolInvocation;
+                            const displayName = getToolDisplayName(tool.toolName, tool.args);
                             return (
-                              <div key={partIndex} className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-neutral-50 rounded-lg text-xs font-mono border border-neutral-200">
+                              <div key={partIndex} className="inline-flex items-center gap-2 mt-2 px-3 py-1.5 bg-neutral-50 rounded-lg text-xs border border-neutral-200">
                                 {tool.state === "result" && tool.result ? (
                                   <>
                                     <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
-                                    <span className="text-neutral-700">{tool.toolName}</span>
+                                    <span className="text-neutral-700">{displayName}</span>
                                   </>
                                 ) : (
                                   <>
                                     <Loader2 className="w-3 h-3 animate-spin text-blue-600" />
-                                    <span className="text-neutral-700">{tool.toolName}</span>
+                                    <span className="text-neutral-700">{displayName}</span>
                                   </>
                                 )}
                               </div>

@@ -95,6 +95,7 @@ Uses Prisma with SQLite (`prisma/schema.prisma`):
 - `User`: Authentication (email/password with bcrypt)
 - `Project`: Stores project metadata, messages (JSON), and file data (JSON)
 - Generated client lives in `src/generated/prisma/`
+- **Always reference `prisma/schema.prisma` for database-related questions**
 
 ### Authentication
 
@@ -148,6 +149,10 @@ Every project MUST have `/App.jsx` (or `/App.tsx`) that exports a React componen
 
 - Use comments sparingly
 - Do not use emojis
+
+## Communication
+
+- Use "Processing" instead of synonyms like "analyzing", "thinking", "checking", etc.
 
 ## Testing
 
