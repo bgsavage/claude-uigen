@@ -144,6 +144,10 @@ The AI uses two tools to modify files:
 ### Component Entry Point
 Every project MUST have `/App.jsx` (or `/App.tsx`) that exports a React component as default export. This is the entry point for the preview.
 
+## Code Style
+
+- Use comments sparingly
+
 ## Testing
 
 - Tests use Vitest with jsdom environment
