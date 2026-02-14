@@ -147,6 +147,7 @@ Every project MUST have `/App.jsx` (or `/App.tsx`) that exports a React componen
 ## Code Style
 
 - Use comments sparingly
+- Do not use emojis
 
 ## Testing
 
